@@ -197,7 +197,7 @@ NotificationToken List::add_notification_callback(CollectionChangeCallback cb)
 {
     verify_attached();
     if (!m_notifier) {
-        m_notifier = std::make_shared<ListNotifier>(m_link_view, m_realm);
+        m_notifier = std::static_pointer_cast<_impl::CollectionNotifier>(std::make_shared<ListNotifier>(m_link_view, m_realm));
         RealmCoordinator::register_notifier(m_notifier);
     }
     return {m_notifier, m_notifier->add_callback(std::move(cb))};
